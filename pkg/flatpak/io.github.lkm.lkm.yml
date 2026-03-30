@@ -182,6 +182,9 @@ modules:
       - install -m644 profiles/*.toml /app/share/lkm/profiles/
       # Man page (present from v0.1.1 onwards)
       - test -f docs/lkm.1 && install -Dm644 docs/lkm.1 /app/share/man/man1/lkm.1 || true
+      # Icon
+      - install -Dm644 pkg/flatpak/io.github.lkm.lkm.svg
+          /app/share/icons/hicolor/scalable/apps/io.github.lkm.lkm.svg
       # Desktop entry
       - install -Dm644 pkg/flatpak/io.github.lkm.lkm.desktop
           /app/share/applications/io.github.lkm.lkm.desktop
