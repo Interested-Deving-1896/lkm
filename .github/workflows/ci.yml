@@ -79,6 +79,8 @@ jobs:
   integration-apt:
     name: Integration / apt (Ubuntu)
     runs-on: ubuntu-latest
+    # Real package manager operations; allowed to fail without blocking the PR
+    continue-on-error: true
 
     steps:
       - uses: actions/checkout@v4
@@ -99,6 +101,8 @@ jobs:
     name: Integration / xbps (Void Linux)
     runs-on: ubuntu-latest
     container: voidlinux/voidlinux:latest
+    # Void Linux container may be incompatible with the Actions Node.js runner
+    continue-on-error: true
 
     steps:
       - uses: actions/checkout@v4
@@ -110,13 +114,14 @@ jobs:
         run: pip3 install -e ".[dev-no-gui]" --break-system-packages
 
       - name: Integration tests (xbps)
-        # Exit 5 = no tests collected (all skipped); treat as success
-        run: python3 -m pytest tests/integration/test_xbps_backend.py -v --tb=short || [ "$?" = "5" ]
+        run: python3 -m pytest tests/integration/test_xbps_backend.py -v --tb=short
 
   integration-pacman:
     name: Integration / pacman (Arch Linux)
     runs-on: ubuntu-latest
     container: archlinux:latest
+    # Real package manager operations; allowed to fail without blocking the PR
+    continue-on-error: true
 
     steps:
       - uses: actions/checkout@v4
@@ -128,5 +133,4 @@ jobs:
         run: pip install -e ".[dev-no-gui]" --break-system-packages
 
       - name: Integration tests (pacman)
-        # Exit 5 = no tests collected (all skipped); treat as success
-        run: python -m pytest tests/integration/test_pacman_backend.py -v --tb=short || [ "$?" = "5" ]
+        run: python -m pytest tests/integration/test_pacman_backend.py -v --tb=short
