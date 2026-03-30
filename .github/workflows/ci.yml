@@ -74,3 +74,55 @@ jobs:
 
       - name: Type check
         run: mypy lkm/ --ignore-missing-imports
+
+  integration-apt:
+    name: Integration / apt (Ubuntu)
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+
+      - name: Install
+        run: pip install -e ".[dev]"
+
+      - name: Integration tests (apt)
+        run: sudo -E pytest tests/integration/test_apt_backend.py -v --tb=short
+
+  integration-xbps:
+    name: Integration / xbps (Void Linux)
+    runs-on: ubuntu-latest
+    container: ghcr.io/void-linux/void-linux:latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install Python + xbps
+        run: xbps-install -Sy python3 python3-pip
+
+      - name: Install lkm
+        run: pip3 install -e ".[dev]" --break-system-packages
+
+      - name: Integration tests (xbps)
+        run: pytest tests/integration/test_xbps_backend.py -v --tb=short
+
+  integration-pacman:
+    name: Integration / pacman (Arch Linux)
+    runs-on: ubuntu-latest
+    container: archlinux:latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install Python
+        run: pacman -Sy --noconfirm python python-pip
+
+      - name: Install lkm
+        run: pip install -e ".[dev]" --break-system-packages
+
+      - name: Integration tests (pacman)
+        run: pytest tests/integration/test_pacman_backend.py -v --tb=short
