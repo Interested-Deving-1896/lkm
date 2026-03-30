@@ -180,9 +180,8 @@ modules:
       # Profiles
       - install -dm755 /app/share/lkm/profiles
       - install -m644 profiles/*.toml /app/share/lkm/profiles/
-      # Man page
-      - install -dm755 /app/share/man/man1
-      - install -m644 docs/lkm.1 /app/share/man/man1/lkm.1
+      # Man page (present from v0.1.1 onwards)
+      - test -f docs/lkm.1 && install -Dm644 docs/lkm.1 /app/share/man/man1/lkm.1 || true
       # Desktop entry
       - install -Dm644 pkg/flatpak/io.github.lkm.lkm.desktop
           /app/share/applications/io.github.lkm.lkm.desktop
@@ -190,6 +189,5 @@ modules:
       - install -Dm644 pkg/flatpak/io.github.lkm.lkm.metainfo.xml
           /app/share/metainfo/io.github.lkm.lkm.metainfo.xml
     sources:
-      - type: git
-        url: https://github.com/Interested-Deving-1896/lkm.git
-        tag: v0.1.0
+      - type: dir
+        path: ../..
