@@ -126,6 +126,43 @@ modules:
         only-arches:
           - aarch64
 
+  # ── hatchling + deps (build backend required by lkm's pyproject.toml) ────────
+  - name: python3-trove-classifiers
+    buildsystem: simple
+    build-commands:
+      - pip3 install --prefix=/app --no-build-isolation trove_classifiers-*.whl
+    sources:
+      - type: file
+        url: https://files.pythonhosted.org/packages/bb/81/a16cb58f719e68d0cce72fb9afd6f0f50c0e474d7b8dc267c8309c3e2793/trove_classifiers-2024.3.3-py3-none-any.whl
+        sha256: 3a84096861b385ec422c79995d1f6435dde47a9b63adaa3c886e53232ba7e6e0
+
+  - name: python3-pathspec
+    buildsystem: simple
+    build-commands:
+      - pip3 install --prefix=/app --no-build-isolation pathspec-*.whl
+    sources:
+      - type: file
+        url: https://files.pythonhosted.org/packages/cc/20/ff623b09d963f88bfde16306a54e12ee5ea43e9b597108672ff3a408aad6/pathspec-0.12.1-py3-none-any.whl
+        sha256: a0d503e138a4c123b27490a4f7beda6a01c6f288df0e4a8b79c7eb0dc7b4cc08
+
+  - name: python3-pluggy
+    buildsystem: simple
+    build-commands:
+      - pip3 install --prefix=/app --no-build-isolation pluggy-*.whl
+    sources:
+      - type: file
+        url: https://files.pythonhosted.org/packages/a5/5b/0cc789b59e8cc1bf288b38111d002d8c5917123194d45b29dcdac64723cc/pluggy-1.4.0-py3-none-any.whl
+        sha256: 7db9f7b503d67d1c5b95f59773ebb58a8c1c288129a88665838012cfb07b8981
+
+  - name: python3-hatchling
+    buildsystem: simple
+    build-commands:
+      - pip3 install --prefix=/app --no-build-isolation hatchling-*.whl
+    sources:
+      - type: file
+        url: https://files.pythonhosted.org/packages/5f/20/b890241570ac3ba6508febab3104eeb1acd7ffba1bd3447190f56151f1bc/hatchling-1.24.2-py3-none-any.whl
+        sha256: 5576ad05227cf96bb4bfd3a5dce31aa53eff05e95da57b40769bd5a3096b31b1
+
   # ── lkm ──────────────────────────────────────────────────────────────────────
   - name: lkm
     buildsystem: simple
