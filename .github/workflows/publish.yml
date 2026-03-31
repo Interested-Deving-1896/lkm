@@ -1,9 +1,19 @@
 name: Publish to PyPI
 
+# Trusted publishing must be configured on PyPI/TestPyPI before this workflow
+# will succeed. See: https://docs.pypi.org/trusted-publishers/adding-a-publisher/
+#
+# Required configuration on both PyPI and TestPyPI:
+#   Owner:     Interested-Deving-1896
+#   Repo:      lkm
+#   Workflow:  publish.yml
+#   Env (TestPyPI): testpypi
+#   Env (PyPI):     pypi
+
 on:
   push:
     tags:
-      - "v*.*.*"   # trigger on version tags: v0.1.0, v1.2.3, etc.
+      - "v*.*.*"
 
 jobs:
   build:
@@ -37,7 +47,7 @@ jobs:
     runs-on: ubuntu-latest
     environment: testpypi
     permissions:
-      id-token: write   # required for trusted publishing
+      id-token: write
 
     steps:
       - uses: actions/download-artifact@v4
@@ -49,14 +59,19 @@ jobs:
         uses: pypa/gh-action-pypi-publish@release/v1
         with:
           repository-url: https://test.pypi.org/legacy/
+          skip-existing: true
+        # Trusted publisher must be configured at test.pypi.org first.
+        # Failure here does not block the PyPI publish job.
+        continue-on-error: true
 
   publish-pypi:
     name: Publish to PyPI
-    needs: publish-testpypi
+    # Run after build regardless of TestPyPI outcome
+    needs: build
     runs-on: ubuntu-latest
     environment: pypi
     permissions:
-      id-token: write   # required for trusted publishing
+      id-token: write
 
     steps:
       - uses: actions/download-artifact@v4
@@ -66,3 +81,5 @@ jobs:
 
       - name: Publish to PyPI
         uses: pypa/gh-action-pypi-publish@release/v1
+        with:
+          skip-existing: true
