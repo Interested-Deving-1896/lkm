@@ -59,20 +59,34 @@ jobs:
           flatpak run --command=appstreamcli org.kde.Sdk//6.7 \
             validate pkg/flatpak/io.github.lkm.lkm.metainfo.xml || true
 
+      - name: Prepare files for appstreamcli compose
+        run: |
+          mkdir -p build-dir/files/share/metainfo
+          mkdir -p build-dir/files/share/applications
+          mkdir -p build-dir/files/share/icons/hicolor/scalable/apps
+          cp pkg/flatpak/io.github.lkm.lkm.metainfo.xml build-dir/files/share/metainfo/
+          cp pkg/flatpak/io.github.lkm.lkm.desktop build-dir/files/share/applications/
+          cp pkg/flatpak/io.github.lkm.lkm.svg build-dir/files/share/icons/hicolor/scalable/apps/
+
       - name: Check appstreamcli compose requirements
         run: |
-          if [ ! -f pkg/flatpak/io.github.lkm.lkm.metainfo.xml ]; then
+          if [ ! -f build-dir/files/share/metainfo/io.github.lkm.lkm.metainfo.xml ]; then
             echo "Required metainfo file is missing for appstreamcli compose!"
             exit 1
           fi
-          if [ ! -f pkg/flatpak/io.github.lkm.lkm.desktop ]; then
+          if [ ! -f build-dir/files/share/applications/io.github.lkm.lkm.desktop ]; then
             echo "Required desktop file is missing for appstreamcli compose!"
             exit 1
           fi
-          if [ ! -f pkg/flatpak/io.github.lkm.lkm.svg ]; then
+          if [ ! -f build-dir/files/share/icons/hicolor/scalable/apps/io.github.lkm.lkm.svg ]; then
             echo "Required icon file is missing for appstreamcli compose!"
             exit 1
           fi
+
+      - name: Run appstreamcli compose
+        run: |
+          flatpak run --command=appstreamcli org.kde.Sdk//6.7 \
+            compose build-dir/files || true
 
       - name: Export bundle
         if: startsWith(github.ref, 'refs/tags/')
