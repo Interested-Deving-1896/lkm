@@ -58,7 +58,7 @@ lkm     = "lkm.cli.main:main"
 lkm-gui = "lkm.gui.app:main"
 
 [project.urls]
-Repository = "https://github.com/Interested-Deving-1896/lkm"
+Repository = "https://gitlab.com/OSPF1896/lkm"
 
 [tool.hatch.build.targets.wheel]
 packages = ["lkm"]
