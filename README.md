@@ -2,7 +2,7 @@
 
 Install, build, and manage Linux kernels across all major distributions and CPU architectures from a single CLI or GUI.
 
-Merges **[lkf](https://gitlab.com/OSPF1896/lkf)** (Linux Kernel Framework — shell build pipeline) and **[ukm](https://gitlab.com/OSPF1896/ukm)** (Universal Kernel Manager — runtime management) into one tool covering the full kernel lifecycle:
+Merges **[lkf](https://gitlab.com/openos-project/linux-kernel_filesystem_deving/lkf)** (Linux Kernel Framework — shell build pipeline) and **[ukm](https://gitlab.com/openos-project/linux-kernel_filesystem_deving/ukm)** (Universal Kernel Manager — runtime management) into one tool covering the full kernel lifecycle:
 
 ```
 fetch → patch → configure → compile → package → install → hold → remove
@@ -93,7 +93,7 @@ lkm info                            # system info (distro, arch, running kernel)
 
 ### Building with lkf
 
-Requires [lkf](https://gitlab.com/OSPF1896/lkf) to be installed (`make install` from the lkf repo).
+Requires [lkf](https://gitlab.com/openos-project/linux-kernel_filesystem_deving/lkf) to be installed (`make install` from the lkf repo).
 
 ```sh
 # Build from a remix.toml profile and install the result
@@ -181,7 +181,7 @@ Adding a new package manager: implement `PackageBackend` in `lkm/core/backends/`
 ## Development
 
 ```sh
-git clone https://gitlab.com/OSPF1896/lkm
+git clone https://gitlab.com/openos-project/linux-kernel_filesystem_deving/lkm
 cd lkm
 python3 -m venv .venv && source .venv/bin/activate
 pip install -e ".[dev]"
@@ -211,7 +211,7 @@ lkm list
 
 **XanMod / Liquorix** — x86-64 only. On first use, lkm offers to add the required apt repository and signing key automatically.
 
-**lkf build** — requires [lkf](https://gitlab.com/OSPF1896/lkf) on PATH. Set `LKF_ROOT` to point lkm at a non-standard lkf installation. Build output lands in `~/.cache/lkm/lkf-output/` by default; override with `LKF_OUTPUT_DIR`.
+**lkf build** — requires [lkf](https://gitlab.com/openos-project/linux-kernel_filesystem_deving/lkf) on PATH. Set `LKF_ROOT` to point lkm at a non-standard lkf installation. Build output lands in `~/.cache/lkm/lkf-output/` by default; override with `LKF_OUTPUT_DIR`.
 
 **Gentoo** — `lkm build` (via lkf) prints the interactive `make menuconfig` command for you to run in a terminal. The GUI Gentoo compile dialog streams the full build output live.
 
@@ -226,5 +226,5 @@ GPL-3.0-or-later. See [LICENSE](LICENSE).
 ## Origins
 
 lkm is a merger of:
-- **[lkf](https://gitlab.com/OSPF1896/lkf)** — Linux Kernel Framework (shell, build pipeline)
-- **[ukm](https://gitlab.com/OSPF1896/ukm)** — Universal Kernel Manager (Python, runtime management)
+- **[lkf](https://gitlab.com/openos-project/linux-kernel_filesystem_deving/lkf)** — Linux Kernel Framework (shell, build pipeline)
+- **[ukm](https://gitlab.com/openos-project/linux-kernel_filesystem_deving/ukm)** — Universal Kernel Manager (Python, runtime management)
