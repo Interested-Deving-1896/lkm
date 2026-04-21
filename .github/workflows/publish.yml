@@ -4,7 +4,7 @@ name: Publish to PyPI
 # will succeed. See: https://docs.pypi.org/trusted-publishers/adding-a-publisher/
 #
 # Required configuration on both PyPI and TestPyPI:
-#   Owner:     Interested-Deving-1896
+#   Owner:     OSPF1896
 #   Repo:      lkm
 #   Workflow:  publish.yml
 #   Env (TestPyPI): testpypi
@@ -18,7 +18,7 @@ on:
 jobs:
   # Guard: only publish from the source repo, not OSP/OOC mirrors
   build:
-    if: github.repository == 'Interested-Deving-1896/lkm'
+    if: github.repository == 'OSPF1896/lkm'
     name: Build distribution
     runs-on: ubuntu-latest
 
