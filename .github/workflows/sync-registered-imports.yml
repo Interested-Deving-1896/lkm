@@ -55,7 +55,7 @@ jobs:
 
       - name: Sync registered imports
         env:
-          GH_TOKEN: ${{ secrets.SYNC_TOKEN }}
+          GH_TOKEN: ${{ secrets.GH_TOKEN }}  # Ensure GH_TOKEN is set
           GITHUB_OWNER: Interested-Deving-1896
           GITLAB_TOKEN: ${{ secrets.GITLAB_SYNC_TOKEN }}
           BITBUCKET_TOKEN: ${{ secrets.BITBUCKET_TOKEN }}
