@@ -4,7 +4,7 @@
 [![Built with Ona](https://ona.com/build-with-ona.svg)](https://app.ona.com/#https://github.com/Interested-Deving-1896/lkm)
 
 <!-- AI:start:what-it-does -->
-This project provides a command-line and optional GUI tool for managing Linux kernels across various distributions and architectures. It simplifies the process of building, installing, and maintaining custom or prebuilt kernels, catering to developers and system administrators who require precise control over kernel versions and configurations.
+This project provides tools to build, install, and manage Linux kernels across various distributions and architectures. It addresses the complexity of kernel management for developers and system administrators by offering a unified interface for tasks such as compiling custom kernels, installing prebuilt variants, and handling kernel dependencies.
 <!-- AI:end:what-it-does -->
 
 ## Architecture
