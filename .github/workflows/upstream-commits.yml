@@ -45,7 +45,12 @@ jobs:
             }}
           REPO_FILTER: ${{ inputs.repo_filter || '' }}
           DRY_RUN: ${{ inputs.dry_run || 'false' }}
-        run: bash scripts/upstream-commits.sh
+        run: |
+          if [ -z "$GH_TOKEN" ]; then
+            echo "Error: GH_TOKEN is required"
+            exit 1
+          fi
+          bash scripts/upstream-commits.sh
       - name: Write summary
         if: always()
         env:
